@@ -1,9 +1,25 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.db.models import Q
 from django.views import View
 from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from product.models import Product, Category
+from .forms import SignUpForm
+
 # Create your views here.
+
+
+class Signup(CreateView):
+    form_class = SignUpForm
+    success_url = reverse_lazy('login')
+    template_name = 'core/signup.html'
+
+
+class Login(LoginView):
+    template_name = 'core/login.html'
 
 
 class Frontpage(ListView):
