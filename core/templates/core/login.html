@@ -1,5 +1,7 @@
 {% extends 'core/base.html' %}
 
+{% block title %}Login{% endblock %}
+
 {% block content %}
 <div class="max-w-lg mx-auto flex flex-wrap p-6">
     <div class="w-full bg-gray-100 p-6 rounded-xl">
@@ -32,6 +34,11 @@
                         <p>{{ error|escape }}</p>
                     </div>
                 {% endfor %}
+            {% endif %}
+            
+
+            {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
             {% endif %}
 
             <div>

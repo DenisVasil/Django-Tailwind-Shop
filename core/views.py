@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.db.models import Q
 from django.views import View
+from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView
@@ -45,3 +46,13 @@ class Shop(View):
                    'categories': categories,
                    'active_categoty': active_category}
         return render(request, 'core/shop.html', context)
+
+
+class MyAccount(LoginRequiredMixin, TemplateView):
+    login_url = '/login/'
+    redirect_field_name = 'next'
+    template_name = 'core/myaccount.html'
+
+
+class EditMyAccount(LoginRequiredMixin, TemplateView):
+    template_name = 'core/edit_myaccount.html'
